@@ -193,3 +193,138 @@ for (int i = 1; i <= rows; i++) {
 For rows = 3 and columns = 6, the expected output is three lines of ######. (To be completed - add the GitHub link after the commit and push.)
 
 ---
+## 2.3 Experiment 3: Debugging a Star Triangle - Nested WHILE
+
+The starter code in this experiment does not print the correct triangle on purpose. The task is to find the errors and fix them without changing the while loops into for loops. The target output for n = 5 is a triangle that grows from 1 star to 5 stars. After it works, the program also prints an inverted triangle.
+
+### 2.3.1 Java Program Code
+
+Starter code (with errors):
+
+```java
+import java.util.Scanner;
+
+public class Triangle30 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the value of n = ");
+        int n = sc.nextInt();
+
+        int i = 0;
+        while (i <= n) {
+            int j = 0;
+            while (j < i) {
+                System.out.print("*");
+                j++;
+            }
+            i++;
+        }
+        sc.close();
+    }
+}
+```
+
+Fixed code (triangle and inverted triangle, debug line removed):
+
+```java
+import java.util.Scanner;
+
+public class Triangle30 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the value of n = ");
+        int n = sc.nextInt();
+
+        // Triangle
+        int i = 1;                       // fix: start from 1, not 0
+        while (i <= n) {
+            int j = 0;
+            while (j < i) {
+                System.out.print("*");
+                j++;
+            }
+            System.out.println();        // fix: move to a new line after each row
+            i++;
+        }
+
+        // Inverted triangle
+        i = n;                           // no "int", because i is already declared
+        while (i >= 1) {
+            int j = 0;
+            while (j < i) {
+                System.out.print("*");
+                j++;
+            }
+            System.out.println();
+            i--;
+        }
+        sc.close();
+    }
+}
+```
+
+### 2.3.2 Running Results / Output Screenshot
+
+> Insert the screenshots of the starter code output, the debug output, and the final output here. (To be completed - no screenshots have been provided yet.)
+
+Expected output of the starter code (example only, calculated by reading the code; not yet confirmed by running the program). The stars are all on one line:
+
+```text
+Enter the value of n = 3
+******
+```
+
+```text
+Enter the value of n = 5
+***************
+```
+
+Expected output with the temporary debug line System.out.print("[i=" + i + "] "); for n = 5 (example only):
+
+```text
+[i=0] [i=1] *[i=2] **[i=3] ***[i=4] ****[i=5] *****
+```
+
+From this debug output, the three observations in step 5 of the job sheet are:
+
+1. The outer loop runs 6 times (i = 0 to 5). The target is only 5 rows, so it is one too many.
+2. When i = 0, no star is printed, because j < 0 is false from the start.
+3. All the stars are on one line because there is no println after the inner loop.
+
+After fix 6a (only adding System.out.println();), the first line is still empty (the i = 0 round). After fix 6b (starting i at 1), the output matches the target.
+
+Expected final output for n = 5 (example only; not yet confirmed by running the program):
+
+```text
+Enter the value of n = 5
+*
+**
+***
+****
+*****
+*****
+****
+***
+**
+*
+```
+
+### 2.3.3 Answers to Questions / Reflection Questions
+
+Question 1: Identify the mismatches in the initial output, and at least two fixes needed to produce a nested triangle pattern.
+
+Answer: There are two mismatches. First, all the stars are printed on one line because there is no line break. Second, the outer loop runs n + 1 times, so the first row has 0 stars (an empty row). The two fixes are:
+
+1. Add System.out.println(); after the inner loop (before i++), so each row is on a new line.
+2. Change the start of the outer loop from int i = 0; to int i = 1;, so the loop runs exactly n times.
+
+Question 2: Explain the roles of the variables i and j. Why must the value of j be reset to 0 in every iteration of the outer loop? What happens if j is not reset?
+
+Answer: i is the row number, and it is also how many stars the current row must have. j counts the stars that have been printed in the current row.
+j must go back to 0 at the start of every row, because each row needs to count its stars from the beginning. If j is not reset, it keeps the value from the last row. Then j < i is only true one time in each new row, so every row after the first prints just 1 star.
+
+Question 3: Explain the changes to the initialization, the condition, and the update of the outer loop that are needed to form the inverted triangle.
+
+Answer: For the inverted triangle, the outer loop must go from big to small. The initialization changes from i = 1 to i = n, so the first row has n stars. The condition changes from i <= n to i >= 1, so the loop stops after the row with 1 star. The update changes from i++ to i--, so each row has one star less than the row before.
+
+---
