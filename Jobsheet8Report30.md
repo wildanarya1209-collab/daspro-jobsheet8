@@ -328,3 +328,121 @@ Question 3: Explain the changes to the initialization, the condition, and the up
 Answer: For the inverted triangle, the outer loop must go from big to small. The initialization changes from i = 1 to i = n, so the first row has n stars. The condition changes from i <= n to i >= 1, so the loop stops after the row with 1 star. The update changes from i++ to i--, so each row has one star less than the row before.
 
 ---
+## 2.4 Experiment 4: Case Study of Group Project Scores
+
+In a group project, each group gets scores from several graders. The program reads the number of groups and the number of graders (the same for every group), then calculates the average score of each group and finds the group with the highest average. The program does not store all the scores. It uses three loops: a while loop (outer) for the groups, a for loop (middle) for the graders, and a do-while loop (inner) to ask again when a score is invalid (not between 0 and 100).
+
+### 2.4.1 Java Program Code
+
+The job sheet leaves the if block in step 7 for the student to complete. The two lines inside it were written by me.
+
+```java
+import java.util.Scanner;
+
+public class GroupScore30 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the number of groups : ");
+        int numGroups = sc.nextInt();
+        System.out.print("Enter the number of graders: ");
+        int numGraders = sc.nextInt();
+
+        if (numGroups <= 0 || numGraders <= 0) {
+            System.out.println("Groups and graders must be > 0.");
+        } else {
+            int groupNo = 1;                 // outer loop counter
+            double highestAverage = -1;      // -1: the first group is recorded
+            int bestGroup = 0;
+
+            while (groupNo <= numGroups) {
+                System.out.println("Group " + groupNo);
+                double totalScore = 0;
+
+                // inner loops over graders
+                for (int j = 1; j <= numGraders; j++) {
+                    int score;
+                    do {
+                        System.out.print("  Score from Grader " + j + ": ");
+                        score = sc.nextInt();
+                        if (score < 0 || score > 100) {
+                            System.out.println("  Score must be 0-100. Retry!");
+                        }
+                    } while (score < 0 || score > 100);
+                    totalScore += score;
+                }
+
+                double averageScore = totalScore / numGraders;
+                System.out.println("Group " + groupNo
+                        + ": average score = " + averageScore);
+
+                if (averageScore > highestAverage) {
+                    highestAverage = averageScore;
+                    bestGroup = groupNo;
+                }
+
+                groupNo++;
+            }
+
+            System.out.println("==============================");
+            System.out.println("Best group          : " + bestGroup);
+            System.out.println("Highest average     : " + highestAverage);
+        }
+        sc.close();
+    }
+}
+```
+
+### 2.4.2 Running Results / Output Screenshot
+
+> Insert the screenshots of the test results here (3 groups and 2 graders with the score 105, 2 groups and 3 graders, and number of groups = 0). (To be completed - no screenshot has been provided yet.)
+
+Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
+
+```text
+Enter the number of groups : 3
+Enter the number of graders: 2
+Group 1
+  Score from Grader 1: 80
+  Score from Grader 2: 90
+Group 1: average score = 85.0
+Group 2
+  Score from Grader 1: 75
+  Score from Grader 2: 105
+  Score must be 0-100. Retry!
+  Score from Grader 2: 85
+Group 2: average score = 80.0
+Group 3
+  Score from Grader 1: 90
+  Score from Grader 2: 96
+Group 3: average score = 93.0
+==============================
+Best group          : 3
+Highest average     : 93.0
+```
+
+If the number of groups is 0, the program should only print Groups and graders must be > 0. (expected, from reading the code).
+
+### 2.4.3 Answers to Questions / Reflection Questions
+
+Question 1: Why must totalScore be reset inside the outer loop, but highestAverage must not be reset for each group?
+
+Answer: totalScore belongs to one group only. If it is not reset to 0 at the start of each group, the scores of the next group are added to the old total, and the average becomes wrong. highestAverage must remember the best average from all the groups that were already checked. If it is reset for every group, the old best value is lost, and the last group would always look like the best group.
+
+Question 2: For 3 groups and 2 graders (without any invalid input), how many times is the body of the FOR loop executed in total?
+
+Answer: The FOR loop runs 2 times for each group, and there are 3 groups, so the body is executed 3 x 2 = 6 times in total.
+
+Question 3: What happens if totalScore is declared as int and the average is calculated using integer division? Give an example of values.
+
+Answer: The part after the decimal point is cut off, so the average is not exact. For example, if a group gets 80 and 85, the total is 165 and 165 / 2 gives 82, not 82.5. Even though averageScore is a double, it would only show 82.0. This can also give a wrong best group when two averages are close to each other.
+
+Question 4: Why is highestAverage given the initial value -1 rather than 0? Give an example of input that produces a wrong result if the initial value were 0.
+
+Answer: A score can be 0, so an average can also be 0. With -1, the first group is always bigger than the starting value, so it is always recorded. If the initial value were 0, a group with an average of 0 would never be recorded, because 0 > 0 is false. For example, with 2 groups and 2 graders where every score is 0, bestGroup would stay 0, which is not a real group.
+
+Question 5: This program has three levels of loops. Name each type of loop and its role.
+
+Answer: The outer loop is a while loop, and it processes the groups one by one. The middle loop is a for loop, and it reads the score from each grader of the current group. The inner loop is a do-while loop, and it asks for the same score again as long as the score is outside the range 0 to 100.
+
+---
