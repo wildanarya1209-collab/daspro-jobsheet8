@@ -446,3 +446,202 @@ Question 5: This program has three levels of loops. Name each type of loop and i
 Answer: The outer loop is a while loop, and it processes the groups one by one. The middle loop is a for loop, and it reads the score from each grader of the current group. The inner loop is a do-while loop, and it asks for the same score again as long as the score is outside the range 0 to 100.
 
 ---
+# 3. Assignment
+
+Time: 120 minutes
+
+## 3.1 Task 1: Nested Number Pattern
+
+The program reads an integer n (at least 1) and prints a number pattern. Row 1 prints 1, row 2 prints 1 2, and so on up to row n. After the pattern, the program shows the total number of digits that were printed. The program assumes that the input n is at least 1, as the job sheet says.
+
+### 3.1.1 Java Program Code
+
+```java
+import java.util.Scanner;
+
+public class Task130 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the value of n = ");
+        int n = sc.nextInt();
+
+        int totalNumbers = 0;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(j + " ");
+                totalNumbers++;
+            }
+            System.out.println();
+        }
+
+        System.out.println("Total numbers printed: " + totalNumbers);
+        sc.close();
+    }
+}
+```
+
+The outer loop with i controls the rows. The inner loop with j prints the numbers from 1 up to i, so row i has i numbers. The variable totalNumbers is a counter, and it goes up by 1 every time a number is printed.
+
+### 3.1.2 Running Results / Output Screenshot
+
+> Insert the screenshot of the program output here. (To be completed - the program has not been run yet.)
+
+Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
+
+```text
+Enter the value of n = 5
+1 
+1 2 
+1 2 3 
+1 2 3 4 
+1 2 3 4 5 
+Total numbers printed: 15
+```
+
+---
+
+## 3.2 Task 2: Multiplication Table
+
+The program reads n (at least 3) and prints an n x n multiplication table. Each position shows the row number times the column number. At the end, the program shows the sum of all numbers in the table.
+
+### 3.2.1 Java Program Code
+
+```java
+import java.util.Scanner;
+
+public class Task230 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the value of n = ");
+        int n = sc.nextInt();
+
+        int total = 0;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                int result = i * j;
+                System.out.printf("%4d", result);
+                total += result;
+            }
+            System.out.println();
+        }
+
+        System.out.println("Total of all numbers: " + total);
+        sc.close();
+    }
+}
+```
+
+The outer loop is the row number i, and the inner loop is the column number j. The product i \* j is stored in result and printed with %4d, which gives each number a width of 4 characters so the columns line up on the right. The variable total is an accumulator that adds every result.
+
+### 3.2.2 Running Results / Output Screenshot
+
+> Insert the screenshot of the program output here. (To be completed - the program has not been run yet.)
+
+Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
+
+```text
+Enter the value of n = 4
+   1   2   3   4
+   2   4   6   8
+   3   6   9  12
+   4   8  12  16
+Total of all numbers: 100
+```
+
+---
+
+## 3.3 Task 3: Sales Recap for Several Stores
+
+A shopping center has several stores. The program asks for the number of stores (at least 1), then for each store the number of customers, and for each customer the number of items bought. The number of customers and items can be 0, but not negative. The program shows the number of customers and total items for each store, the total items of all stores, and the number of the store with the most items. If two stores have the same highest total, the store with the smaller number is shown.
+
+### 3.3.1 Java Program Code
+
+```java
+import java.util.Scanner;
+
+public class Task330 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the number of stores: ");
+        int numStores = sc.nextInt();
+
+        if (numStores < 1) {
+            System.out.println("The number of stores must be at least 1.");
+        } else {
+            int totalAllItems = 0;
+            int mostItems = -1;      // -1: the first store is always recorded
+            int bestStore = 0;
+            int storeNo = 1;
+
+            while (storeNo <= numStores) {
+                int numCustomers;
+                do {
+                    System.out.print("Enter the number of customers in store " + storeNo + ": ");
+                    numCustomers = sc.nextInt();
+                    if (numCustomers < 0) {
+                        System.out.println("Must not be negative. Retry!");
+                    }
+                } while (numCustomers < 0);
+
+                int storeItems = 0;
+
+                for (int c = 1; c <= numCustomers; c++) {
+                    int items;
+                    do {
+                        System.out.print("  Items bought by customer " + c + ": ");
+                        items = sc.nextInt();
+                        if (items < 0) {
+                            System.out.println("  Must not be negative. Retry!");
+                        }
+                    } while (items < 0);
+                    storeItems += items;
+                }
+
+                System.out.println("Store " + storeNo + " - customers: " + numCustomers
+                        + ", total items: " + storeItems);
+
+                totalAllItems += storeItems;
+
+                if (storeItems > mostItems) {
+                    mostItems = storeItems;
+                    bestStore = storeNo;
+                }
+
+                storeNo++;
+            }
+
+            System.out.println("Total items across all stores: " + totalAllItems);
+            System.out.println("Store with the most items: " + bestStore);
+        }
+        sc.close();
+    }
+}
+```
+
+The program uses three levels of loops. The while loop goes through the stores, the for loop goes through the customers of one store, and the do-while loops ask again when a number is negative. Because the data is not stored one by one, the summary of each store is printed right after its data is entered. The variable storeItems is reset to 0 for every store, while totalAllItems, mostItems, and bestStore keep their values across all stores. The check storeItems > mostItems uses > and not >=, so when two stores have the same total, the earlier (smaller) store number stays as the answer. mostItems starts at -1 so a store with 0 items can still be recorded.
+
+### 3.3.2 Running Results / Output Screenshot
+
+> Insert the screenshot of the program output here. (To be completed - the program has not been run yet.)
+
+Expected output for the example in the job sheet (Store 1: 2 customers who bought 3 and 2 items; Store 2: 3 customers who bought 1, 4, and 2 items). This is an example only, calculated from the code, and has not been confirmed by running the program:
+
+```text
+Enter the number of stores: 2
+Enter the number of customers in store 1: 2
+  Items bought by customer 1: 3
+  Items bought by customer 2: 2
+Store 1 - customers: 2, total items: 5
+Enter the number of customers in store 2: 3
+  Items bought by customer 1: 1
+  Items bought by customer 2: 4
+  Items bought by customer 3: 2
+Store 2 - customers: 3, total items: 7
+Total items across all stores: 12
+Store with the most items: 2
+```
