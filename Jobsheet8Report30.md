@@ -47,7 +47,7 @@ public class Star30 {
 
 ### 2.1.2 Running Results / Output Screenshot
 
-> Insert the screenshot of the program output here. (To be completed - no screenshot has been provided yet.)
+![alt text](<Screenshot 2026-11-11 080959.png>)
 
 Expected output (example only, calculated from the code; not yet confirmed by running the program). The number after = is the input.
 
@@ -91,8 +91,7 @@ for (int i = 1; i <= n; i += 2) {
     System.out.print(i + " ");
 }
 ```
-
-For n = 9 the expected output is 1 3 5 7 9.
+![alt text](image.png)
 
 Question 4: Explain why changing the increment i++ to i-- (with the condition still i <= n) makes the loop run endlessly.
 
@@ -130,34 +129,7 @@ public class Rectangle30 {
 
 ### 2.2.2 Running Results / Output Screenshot
 
-> Insert the screenshot of the program output here. (To be completed - no screenshot has been provided yet.)
-
-Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
-
-```text
-Enter the number of rows: 3
-Enter the number of columns: 6
-******
-******
-******
-```
-
-Expected output for the other two inputs in the job sheet (example only, calculated from the code):
-
-```text
-Enter the number of rows: 4
-Enter the number of columns: 2
-**
-**
-**
-**
-```
-
-```text
-Enter the number of rows: 1
-Enter the number of columns: 5
-*****
-```
+![alt text](<Screenshot 2026-11-11 081158.png>)
 
 ### 2.2.3 Answers to Questions / Reflection Questions
 
@@ -189,8 +161,7 @@ for (int i = 1; i <= rows; i++) {
     System.out.println();
 }
 ```
-
-For rows = 3 and columns = 6, the expected output is three lines of ######. (To be completed - add the GitHub link after the commit and push.)
+![alt text](image-1.png)
 
 ---
 ## 2.3 Experiment 3: Debugging a Star Triangle - Nested WHILE
@@ -265,49 +236,16 @@ public class fixTriangle30 {
 
 ### 2.3.2 Running Results / Output Screenshot
 
-> Insert the screenshots of the starter code output, the debug output, and the final output here. (To be completed - no screenshots have been provided yet.)
+output without the temporary debug line System.out.print("[i=" + i + "] "); for n = 5 :
 
-Expected output of the starter code (example only, calculated by reading the code; not yet confirmed by running the program). The stars are all on one line:
+![alt text](<Screenshot 2026-11-11 081513.png>)
 
-```text
-Enter the value of n = 3
-******
-```
+![alt text](<Screenshot 2026-11-11 081519.png>)
 
-```text
-Enter the value of n = 5
-***************
-```
+output with the temporary debug line System.out.print("[i=" + i + "] "); for n = 5 :
 
-Expected output with the temporary debug line System.out.print("[i=" + i + "] "); for n = 5 (example only):
+![alt text](image-2.png)
 
-```text
-[i=0] [i=1] *[i=2] **[i=3] ***[i=4] ****[i=5] *****
-```
-
-From this debug output, the three observations in step 5 of the job sheet are:
-
-1. The outer loop runs 6 times (i = 0 to 5). The target is only 5 rows, so it is one too many.
-2. When i = 0, no star is printed, because j < 0 is false from the start.
-3. All the stars are on one line because there is no println after the inner loop.
-
-After fix 6a (only adding System.out.println();), the first line is still empty (the i = 0 round). After fix 6b (starting i at 1), the output matches the target.
-
-Expected final output for n = 5 (example only; not yet confirmed by running the program):
-
-```text
-Enter the value of n = 5
-*
-**
-***
-****
-*****
-*****
-****
-***
-**
-*
-```
 
 ### 2.3.3 Answers to Questions / Reflection Questions
 
@@ -395,33 +333,7 @@ public class GroupScore30 {
 
 ### 2.4.2 Running Results / Output Screenshot
 
-> Insert the screenshots of the test results here (3 groups and 2 graders with the score 105, 2 groups and 3 graders, and number of groups = 0). (To be completed - no screenshot has been provided yet.)
-
-Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
-
-```text
-Enter the number of groups : 3
-Enter the number of graders: 2
-Group 1
-  Score from Grader 1: 80
-  Score from Grader 2: 90
-Group 1: average score = 85.0
-Group 2
-  Score from Grader 1: 75
-  Score from Grader 2: 105
-  Score must be 0-100. Retry!
-  Score from Grader 2: 85
-Group 2: average score = 80.0
-Group 3
-  Score from Grader 1: 90
-  Score from Grader 2: 96
-Group 3: average score = 93.0
-==============================
-Best group          : 3
-Highest average     : 93.0
-```
-
-If the number of groups is 0, the program should only print Groups and graders must be > 0. (expected, from reading the code).
+![alt text](image-3.png)
 
 ### 2.4.3 Answers to Questions / Reflection Questions
 
@@ -481,24 +393,9 @@ public class Task130 {
     }
 }
 ```
-
-The outer loop with i controls the rows. The inner loop with j prints the numbers from 1 up to i, so row i has i numbers. The variable totalNumbers is a counter, and it goes up by 1 every time a number is printed.
-
 ### 3.1.2 Running Results / Output Screenshot
 
-> Insert the screenshot of the program output here. (To be completed - the program has not been run yet.)
-
-Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
-
-```text
-Enter the value of n = 5
-1 
-1 2 
-1 2 3 
-1 2 3 4 
-1 2 3 4 5 
-Total numbers printed: 15
-```
+![alt text](image-4.png)
 
 ---
 
@@ -535,22 +432,9 @@ public class Task230 {
 }
 ```
 
-The outer loop is the row number i, and the inner loop is the column number j. The product i \* j is stored in result and printed with %4d, which gives each number a width of 4 characters so the columns line up on the right. The variable total is an accumulator that adds every result.
-
 ### 3.2.2 Running Results / Output Screenshot
 
-> Insert the screenshot of the program output here. (To be completed - the program has not been run yet.)
-
-Expected output (example only, taken from the job sheet; not yet confirmed by running the program):
-
-```text
-Enter the value of n = 4
-   1   2   3   4
-   2   4   6   8
-   3   6   9  12
-   4   8  12  16
-Total of all numbers: 100
-```
+![alt text](image-5.png)
 
 ---
 
@@ -623,25 +507,6 @@ public class Task330 {
 }
 ```
 
-The program uses three levels of loops. The while loop goes through the stores, the for loop goes through the customers of one store, and the do-while loops ask again when a number is negative. Because the data is not stored one by one, the summary of each store is printed right after its data is entered. The variable storeItems is reset to 0 for every store, while totalAllItems, mostItems, and bestStore keep their values across all stores. The check storeItems > mostItems uses > and not >=, so when two stores have the same total, the earlier (smaller) store number stays as the answer. mostItems starts at -1 so a store with 0 items can still be recorded.
-
 ### 3.3.2 Running Results / Output Screenshot
 
-> Insert the screenshot of the program output here. (To be completed - the program has not been run yet.)
-
-Expected output for the example in the job sheet (Store 1: 2 customers who bought 3 and 2 items; Store 2: 3 customers who bought 1, 4, and 2 items). This is an example only, calculated from the code, and has not been confirmed by running the program:
-
-```text
-Enter the number of stores: 2
-Enter the number of customers in store 1: 2
-  Items bought by customer 1: 3
-  Items bought by customer 2: 2
-Store 1 - customers: 2, total items: 5
-Enter the number of customers in store 2: 3
-  Items bought by customer 1: 1
-  Items bought by customer 2: 4
-  Items bought by customer 3: 2
-Store 2 - customers: 3, total items: 7
-Total items across all stores: 12
-Store with the most items: 2
-```
+![alt text](image-6.png)
