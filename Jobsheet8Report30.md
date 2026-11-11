@@ -229,7 +229,7 @@ Fixed code (triangle and inverted triangle, debug line removed):
 ```java
 import java.util.Scanner;
 
-public class Triangle30 {
+public class fixTriangle30 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the value of n = ");
